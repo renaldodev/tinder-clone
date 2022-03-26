@@ -16,7 +16,7 @@ const style = {
 }
 
 export default function Header() {
-  const [waletAddress, setWalletAddress] = useState('0xff6d6ffgggd6')
+  const [waletAddress, setWalletAddress] = useState('')
   return (
     <div className={style.container}>
       <div className={style.leftContainer}>
