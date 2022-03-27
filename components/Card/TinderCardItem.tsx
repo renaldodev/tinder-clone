@@ -24,21 +24,25 @@ const onSwipe = (direction: 'left' | 'right' | 'up' | 'down') => {
   }
 }
 
-export default function TinderCardItem() {
+type Props = {
+  card: any
+}
+
+export default function TinderCardItem({card}:Props) {
   return (
     <TinderCard
       className={style.tinderCardContainer}
       preventSwipe={['up', 'down']}
       onSwipe={onSwipe}
     >
-      <div className={style.container} style={{backgroundImage:"url('https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=389&q=80')"}}>
+      <div className={style.container} style={{backgroundImage:`url('${card?.imageUrl}')`}}>
         <div className={style.space}>
           <div className={style.name}>
-            Lance
-            <span className={style.age}>99</span>
+            {card?.name}
+            <span className={style.age}>{card?.age}</span>
           </div>
         </div>
-        <div className={style.walletAddress}>0x...456</div>
+        <div className={style.walletAddress}>{card?.walletAddress.slice(0,6)}...{card?.walletAddress.slice(36)}</div>
         <div className={style.reactionContainer}>
           <div className={`${style.backColor} ${style.buttonContainer}`}>
             <FaUndoAlt className={`${style.backColor} ${style.buttonSymbol}`} />

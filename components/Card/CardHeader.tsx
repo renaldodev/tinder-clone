@@ -1,5 +1,7 @@
 import Image from 'next/image'
+import { useContext } from 'react'
 import {IoIosNotifications} from 'react-icons/io'
+import { tinderContext } from '../../context/TinderContext'
 import ProfilePic from '../../img/profile.png'
 import TinderLogo from '../../img/tinder-1.svg'
 
@@ -12,9 +14,10 @@ const  style={
 }
 
 export default function CardHeader() {    
+    const {currentUser} =useContext(tinderContext)
     return(
         <div className={style.container}>
-            <Image src={ProfilePic} alt="profile" height={40} width={40} className={style.profile}/>
+            <Image src={currentUser?currentUser?.imageUrl:ProfilePic} alt="profile" height={40} width={40} className={style.profile}/>
             <Image src={TinderLogo} alt="tinder logo" height={40} width={200} className={style.logo}/>
           
           <div className='flex items-center'>

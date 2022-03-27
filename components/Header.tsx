@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FaGlobe } from 'react-icons/fa'
+import { tinderContext } from '../context/TinderContext'
 import Logo from '../img/tinder-icon.svg'
 
 const style = {
@@ -16,7 +17,8 @@ const style = {
 }
 
 export default function Header() {
-  const [waletAddress, setWalletAddress] = useState('')
+  const { connectWallet, disconnectWallet, currentAccount, currentUser } =
+    useContext(tinderContext)
   return (
     <div className={style.container}>
       <div className={style.leftContainer}>
@@ -48,10 +50,14 @@ export default function Header() {
         </nav>
       </div>
       <div className={style.rightContainer}>
-        {waletAddress ? (
+        {currentAccount ? (
           <>
-            <span className={style.walletAddress}>{waletAddress}</span>
-            <button className={style.loginButton}>Logout</button>
+            <span className={style.walletAddress}>
+            {currentAccount.slice(0,6)}...{currentAccount.slice(36)}
+            </span>
+            <button className={style.loginButton} onClick={disconnectWallet}>
+              Logout
+            </button>
           </>
         ) : (
           <>
@@ -59,7 +65,9 @@ export default function Header() {
               <FaGlobe />
               English
             </button>
-            <button className={style.loginButton}>Login</button>
+            <button className={style.loginButton} onClick={connectWallet}>
+              Login
+            </button>
           </>
         )}
       </div>

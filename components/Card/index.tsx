@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import {SiTinder} from 'react-icons/si'
+import { tinderContext } from '../../context/TinderContext'
 import CardFooter from './CardFooter'
 import CardHeader from './CardHeader'
 import TinderCardItem from './TinderCardItem'
@@ -13,6 +15,7 @@ const style = {
 }
 
 export default function Card() {    
+    const {cards}=useContext(tinderContext)
     return(
         <div className={style.container}>
             <CardHeader/>
@@ -22,7 +25,10 @@ export default function Card() {
                       <p className={style.noMoreText}>No more profile in your location...</p>
                    </div>
                    <div className={style.swipeProfile}>
-                       <TinderCardItem/>
+                       {cards.map((card:any,index)=>(
+                           <TinderCardItem card={card} key={index}/>
+
+                       ))}
                    </div>
                </div>
             <CardFooter/>
