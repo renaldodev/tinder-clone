@@ -16,7 +16,7 @@ export default async function handler(
    const user=await client.fetch(query);
    let isMatch=false;
    user[0].likes.forEach((likedUser:any)=> {
-        if(likedUser._ref===req.body.currentUser){
+        if(likedUser._ref===req.body.currentAccount){
             isMatch=true
         }
    });

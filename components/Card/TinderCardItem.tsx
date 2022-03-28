@@ -2,6 +2,8 @@ import { FaUndoAlt } from 'react-icons/fa'
 import { AiOutlineClose, AiFillStar } from 'react-icons/ai'
 import { BsFillLightningChargeFill } from 'react-icons/bs'
 import TinderCard from 'react-tinder-card'
+import { useContext } from 'react'
+import { tinderContext } from '../../context/TinderContext'
 const style = {
   container: `w-full h-full overflow-hidden bg-no-repeat bg-cover bg-center relative px-8 py-4`,
   tinderCardContainer: `w-full h-full absolute`,
@@ -18,17 +20,21 @@ const style = {
   LigtningColors: `border-purple-500 text-purple-500`,
 }
 
-const onSwipe = (direction: 'left' | 'right' | 'up' | 'down') => {
-  if (direction === 'right') {
-    // handleRightSwipe(card,currentAccount)
-  }
-}
 
 type Props = {
   card: any
 }
 
 export default function TinderCardItem({card}:Props) {
+  const {currentAccount,handleRightSwipe} =useContext(tinderContext);
+  const onSwipe = (direction: 'left' | 'right' | 'up' | 'down') => {
+    if (direction === 'right') {
+      console.log("Estou aqui");
+      
+      handleRightSwipe(card,currentAccount!)
+    }
+  }
+
   return (
     <TinderCard
       className={style.tinderCardContainer}

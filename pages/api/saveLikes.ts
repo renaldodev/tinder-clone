@@ -8,17 +8,18 @@ export default async function handler(
 ) {
   try {
     await client
-      .patch('users')
+      .patch(req.body.currentAccount)
       .setIfMissing({ likes: [] })
       .insert('after', 'likes[-1]', [
         {
-          _key: `${req.body.likedUser} - ${req.body.currentUser}`,
+          _key: `${req.body.likedUser} - ${req.body.currentAccount}`,
           _ref: req.body.likedUser,
           _type: 'reference',
         },
       ]).commit()
-      res.status(200).send({});
+      res.status(200).send({ message: 'success' })
   } catch (error) {
+    console.log(error)
     res.status(500).send({ message: 'error', data: error })
   }
 }
